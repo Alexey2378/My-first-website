@@ -1,0 +1,15 @@
+.dialogs {
+display: grid;
+grid-template-columns: 5fr 20fr;
+
+}
+.dialogsItems {
+padding: 15px;
+
+}
+.messages {
+}
+
+.message {
+    padding: 15px;
+}
