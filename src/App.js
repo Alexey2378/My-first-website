@@ -11,6 +11,9 @@ import Working from './components/Working/Working';
 
 
 const App = (props) => {
+
+
+
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
@@ -18,8 +21,13 @@ const App = (props) => {
         <Navbar />
         <div className='app-wrapper-content'>
           <Routes>
-            <Route path='/dialogs' element={<Dialogs />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/dialogs' element={<Dialogs DialogsElements={props.DialogsElements} MessagesElements={props.MessagesElements}
+              updateNewMessageText={props.updateNewMessageText}
+              state={props.state.dialogsPage} />} />
+            <Route path='/profile' element={<Profile profilePage={props.state.profilePage} 
+            newPostText= {props.newPostText}
+            updateNewPostText={props.updateNewPostText}
+            addPost={props.addPost}/>} />
             <Route path='/news' element={<News />} />
             <Route path='/working' element={<Working />} />
             <Route path='/settings' element={<Settings />} />

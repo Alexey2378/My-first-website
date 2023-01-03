@@ -5,12 +5,18 @@ import Post from './Post';
 
 const MyPosts = (props) => {
 
-    let posts = [
-        { id: 1, message: 'Hello,how are you' },
-        { id: 2, message: 'It is my first post' }
-    ]
+    let PostsElements = props.posts.map((p) => <Post message={p.message} id={p.id} />)
 
-    let PostsElements = posts.map((p) => <Post message={p.message} id={p.id} />)
+let newPostElement = React.createRef();
+
+    let addPost = () => {
+        props.addPost();
+        props.updateNewPostText('');
+    }
+    let onPostChange = () => {
+        let text = newPostElement.current.value;
+        props.updateNewPostText (text);
+    }
 
     return (
         <div className={p.postsBlock}>
@@ -18,10 +24,11 @@ const MyPosts = (props) => {
                 <h3>Write me</h3>
             </div>
             <div>
-                <textarea></textarea>
+                <textarea onChange={onPostChange} ref={newPostElement} 
+                value={props.newPostText}/> 
             </div>
             <div>
-                <button>SEND</button>
+                <button onClick={addPost}>SEND</button>
             </div>
             <div>
                 {PostsElements}
