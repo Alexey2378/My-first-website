@@ -11,9 +11,9 @@ const Message = (props) => {
         props.addMessage();
         props.updateNewMessageText('');
     }
-let onMessageChange = () => {
-    let text = newMessageElement.current.value;
-    props.updateNewMessageText (text);
+    let onMessageChange = () => {
+        let text = newMessageElement.current.value;
+        props.updateNewMessageText(text);
     }
 
     return (
@@ -22,9 +22,11 @@ let onMessageChange = () => {
                 <div className={d.message}>{props.message}</div>
             </div>
             <div>
-                <textarea onChange={onMessageChange} 
-                ref={newMessageElement} 
-                value={props.newMessageText}/>
+                <textarea onChange={onMessageChange}
+                    ref={newMessageElement}
+                    value={props.newMessageText}
+
+                />
                 <button onClick={addMessage}>Write</button>
             </div>
 
