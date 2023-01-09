@@ -1,3 +1,8 @@
+import dialogsReducer from "./dialogsReducer"
+import profileReducer from "./profileReducer"
+import sideBarReducer from "./sideBarReducer"
+
+
 let store = {
     _state: {
         profilePage: {
@@ -21,7 +26,10 @@ let store = {
                 { id: 2, message: 'Hello,how are you?' },
                 { id: 3, message: 'Hello,can I writing?' },
             ],
-            newMessageText: 'nail.com'
+            newMessageBody: ''
+        },
+        sideBar: {
+
         }
     },
     _callSubscriber() {
@@ -35,34 +43,17 @@ let store = {
         this._callSubscriber = observer;
     },
 
-    addMessage() {
-        let newMessage = {
-            id: 4,
-            message: this._state.dialogsPage.newMessageText,
-        }
-        this._state.profilePage.posts.push(newMessage);
-        this._callSubscriber(this._state);
-    },
-    updateNewMessageText(newMessage) {
-        this._state.dialogsPage.newMessageText = newMessage;
-        this._callSubscriber(this._state);
-    },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let newPost = {
-                id: 3,
-                message: this._state.profilePage.newPostText,
-            }
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        }
 
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sideBar = sideBarReducer(this._state.sideBar, action)
+
+        this._callSubscriber(this._state);
     }
 }
+
+
 
 
 
