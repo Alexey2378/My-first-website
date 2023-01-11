@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Dialogs from './components/Dialogs/Dialogs';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
 import Header from './components/header/Header';
 import Navbar from './components/navbar/Navbar';
 import News from './components/News/News';
@@ -18,12 +19,10 @@ const App = (props) => {
         <Navbar />
         <div className='app-wrapper-content'>
           <Routes>
-            <Route path='/dialogs' element={<Dialogs store={props.store} DialogsElements={props.DialogsElements} MessagesElements={props.MessagesElements}
+            <Route path='/dialogs' element={<DialogsContainer store={props.store} DialogsElements={props.DialogsElements} MessagesElements={props.MessagesElements}
               updateNewMessageText={props.updateNewMessageText}
               state={props.state.dialogsPage} />} />
-            <Route path='/profile' element={<Profile profilePage={props.state.profilePage}
-              newPostText={props.newPostText}
-              dispatch={props.dispatch} />} />
+            <Route path='/profile' element={<Profile store={props.store} />} />
             <Route path='/news' element={<News />} />
             <Route path='/working' element={<Working />} />
             <Route path='/settings' element={<Settings />} />
