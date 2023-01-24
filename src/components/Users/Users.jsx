@@ -1,22 +1,26 @@
-import axios from 'axios';
 import React from 'react';
-import styles from './clients.module.css'
+import styles from './users.module.css'
 import userPhoto from '../../assets/images/imageses.png';
 
-let Clients = (props) => {
+let Users = (props) => {
 
-    if (props.clients.length === 0) {
+    let pagesCount = Math.ceil (props.totalUsersCount / props.pageSize);
 
-        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-            props.setClients(response.data.items);
-        });
-
-
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
     }
 
+   
     return <div>
+        <div>
+            {pages.map(p => {
+                return <span className={props.currentPage === p && styles.selectedPage}
+                    onClick={(e) => { props.onPageChanged(p); }}>{p}</span>
+            })}
+        </div>
         {
-            props.clients.map(c => <div key={c.id}>
+            props.users.map(c => <div key={c.id}>
                 <span>
                     <div>
                         <img src={c.photos.small != null ? c.photos.small : userPhoto} className={styles.clientPhoto} />
@@ -40,9 +44,6 @@ let Clients = (props) => {
             </div>)
         }
     </div>
-
 }
 
-
-
-export default Clients;
+export default Users;
